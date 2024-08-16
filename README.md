@@ -26,3 +26,5 @@ This project is developed using [Vite](https://vitejs.dev/guide/)
   Open the link in the browser to view the application.
 
     for example:  http://localhost:5173/ (port number might vary)
+
+7. Inspect the website in the browser to check the data that has been sent in API in the console.
