@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply m-0 ;
+  }
+}
+
+@layer utilities {
+  .input {
+    @apply appearance-none block w-full bg-[#ecddd593] text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-[#00264d];
+  }
+
+  .label {
+    @apply block tracking-wide text-gray-700 text-xs font-semibold mb-2;
+  }
+}
