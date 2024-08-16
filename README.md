@@ -1,6 +1,8 @@
-This project is developed using [Vite](https://vitejs.dev/guide/)
+
 
 ## Project setup
+
+This project is developed using [Vite](https://vitejs.dev/guide/)
 
 1. Make sure [Node.js](https://nodejs.org/en/download/package-manager) installed to use npm. 
 
