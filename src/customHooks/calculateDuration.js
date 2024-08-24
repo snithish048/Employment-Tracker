@@ -1,24 +1,51 @@
-export default function calculateDuration(startDate, endDate) {
-  const start = new Date(startDate);
-  const end = new Date(endDate);
+import {
+  differenceInYears,
+  differenceInMonths,
+  addYears,
+  addMonths,
+  differenceInDays,
+} from "date-fns";
+
+function calculateDuration(startDate, endDate) {
+  const start = new Date(
+    Date.UTC(
+      new Date(startDate).getFullYear(),
+      new Date(startDate).getMonth(),
+      new Date(startDate).getDate()
+    )
+  );
+  const end = new Date(
+    Date.UTC(
+      new Date(endDate).getFullYear(),
+      new Date(endDate).getMonth(),
+      new Date(endDate).getDate()
+    )
+  );
 
   if (start > end) {
-    return "Invalid";
+    return "invalid";
   }
 
-  let years = end.getFullYear() - start.getFullYear();
-  let months = end.getMonth() - start.getMonth();
-  let days = end.getDate() - start.getDate();
+  let years = differenceInYears(end, start);
+  const adjustedStartAfterYears = addYears(start, years);
+
+  let months = differenceInMonths(end, adjustedStartAfterYears);
+
+  const adjustedStartAfterMonths = addMonths(adjustedStartAfterYears, months);
+
+  // const days = differenceInDays(end, adjustedStartAfterMonths);
+  const days = differenceInDays(
+    end,
+    addMonths(adjustedStartAfterYears, months)
+  );
+
+  if (adjustedStartAfterMonths > end) {
+    months -= 1;
+  }
 
   if (months < 0) {
-    years--;
+    years -= 1;
     months += 12;
-  }
-
-  if (days < 0) {
-    months--;
-    const prevMonth = new Date(end.getFullYear(), end.getMonth() - 1, 0);
-    days += prevMonth.getDate();
   }
 
   if (years === 0 && months === 0) {
@@ -26,8 +53,14 @@ export default function calculateDuration(startDate, endDate) {
   }
 
   if (years === 0) {
-    return `${months} months and ${days} days`;
+    return `${months} months`;
   }
 
-  return `${years} years and ${months} months`;
+  if (months > 0) {
+    return `${years} years, ${months} months`;
+  }
+
+  return `${years} years`;
 }
+
+export default calculateDuration;

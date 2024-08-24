@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import calculateDuration from "../customHooks/calculateDuration";
 import axios from "axios";
 
 const EmployeeForm = ({ onAddEmployment, setIsSubmit }) => {
+
+  const [maxDate, setMaxDate] = useState('');
   const [formValues, setFormValues] = useState({
     companyName: "",
     position: "",
@@ -11,6 +13,11 @@ const EmployeeForm = ({ onAddEmployment, setIsSubmit }) => {
     endDate: "",
     description: "",
   });
+
+  useEffect(() => {
+    const today = new Date().toISOString().split('T')[0];
+    setMaxDate(today);
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -26,8 +33,8 @@ const EmployeeForm = ({ onAddEmployment, setIsSubmit }) => {
       formValues.startDate,
       formValues.endDate
     );
-    if (duration === "Invalid") {
-      alert("Invalid Date Range");
+    if (duration === "invalid") {
+      alert("Start Date cannot be later than end Date");
     } else {
       const employmentData = {
         ...formValues,
@@ -104,6 +111,7 @@ const EmployeeForm = ({ onAddEmployment, setIsSubmit }) => {
           value={formValues.startDate}
           onChange={handleChange}
           className="input"
+          max={maxDate}
           required
         />
       </div>

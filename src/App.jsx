@@ -16,7 +16,7 @@ const App = () => {
   }, [employments]);
 
   const addEmployment = (employment) => {
-    setEmployments((prevEmployments) => [employment]);
+    setEmployments(() => [employment]);
   };
 
   return (

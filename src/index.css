@@ -10,7 +10,7 @@
 
 @layer utilities {
   .input {
-    @apply appearance-none block w-full bg-[#ecddd593] text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-[#00264d];
+    @apply appearance-none block w-full bg-[#ecddd593] text-gray-700 border border-gray-400 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-[#f5f6fc] focus:border-[#00264d];
   }
 
   .label {
